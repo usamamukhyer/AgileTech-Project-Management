@@ -21,6 +21,7 @@ namespace ProjectAssigned.Models
             this.DeveloperWorkProgresses = new HashSet<DeveloperWorkProgress>();
             this.NewModules = new HashSet<NewModule>();
             this.ProjectFeedbacks = new HashSet<ProjectFeedback>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
         public int Developer_Id { get; set; }
@@ -45,5 +46,7 @@ namespace ProjectAssigned.Models
         public virtual ICollection<NewModule> NewModules { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProjectFeedback> ProjectFeedbacks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

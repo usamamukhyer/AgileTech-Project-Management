@@ -20,6 +20,15 @@
         <AssociationConnector Association="AssignProjectModel.FK_DeveloperWorkProgress_NewModule" ManuallyRouted="false" />
         <AssociationConnector Association="AssignProjectModel.FK_DeveloperWorkProgress_ProjectFeedback" ManuallyRouted="false" />
         <AssociationConnector Association="AssignProjectModel.FK_ProjectFeedback_NewModule" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AssignProjectModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AssignProjectModel.AspNetRole" Width="1.5" PointX="1.125" PointY="9.875" />
+        <EntityTypeShape EntityType="AssignProjectModel.AspNetUserClaim" Width="1.5" PointX="5.625" PointY="10.875" />
+        <EntityTypeShape EntityType="AssignProjectModel.AspNetUserLogin" Width="1.5" PointX="5.625" PointY="8.375" />
+        <EntityTypeShape EntityType="AssignProjectModel.AspNetUser" Width="1.5" PointX="3.375" PointY="8.375" />
+        <AssociationConnector Association="AssignProjectModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AssignProjectModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AssignProjectModel.FK_AspNetUsers_CreateDeveloper" />
+        <AssociationConnector Association="AssignProjectModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
