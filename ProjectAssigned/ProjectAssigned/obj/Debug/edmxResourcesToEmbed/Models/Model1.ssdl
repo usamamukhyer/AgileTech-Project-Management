@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AssignProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CreateDeveloper">
+    <Key>
+      <PropertyRef Name="Developer_Id" />
+    </Key>
+    <Property Name="Developer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Lastname" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Joindate" Type="datetime" Nullable="false" />
+    <Property Name="Salary" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Experience" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Cv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Bio" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CreateProject">
+    <Key>
+      <PropertyRef Name="Project_Id" />
+    </Key>
+    <Property Name="Project_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectTitle" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Budget" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="AwardDate" Type="datetime" Nullable="false" />
+    <Property Name="Startdate" Type="datetime" Nullable="false" />
+    <Property Name="Enddate" Type="datetime" Nullable="false" />
+    <Property Name="ActualCompletedate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Statusfeedback" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Fileuploads" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Discription" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Developer_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="DeveloperWorkProgress">
+    <Key>
+      <PropertyRef Name="Workid" />
+    </Key>
+    <Property Name="Workid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Addfile" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="discription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModuleId" Type="int" />
+    <Property Name="Project_Id" Type="int" />
+    <Property Name="Developer_Id" Type="int" />
+    <Property Name="FeedId" Type="int" />
+  </EntityType>
+  <EntityType Name="NewModule">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+    </Key>
+    <Property Name="ModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Budget" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="AwardDate" Type="datetime" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="ActualCompletedate" Type="datetime" Nullable="false" />
+    <Property Name="Discription" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Assign" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Project_Id" Type="int" />
+    <Property Name="Developer_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="ProjectFeedback">
+    <Key>
+      <PropertyRef Name="FeedId" />
+    </Key>
+    <Property Name="FeedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Startdate" Type="datetime" Nullable="false" />
+    <Property Name="time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Enddate" Type="datetime" Nullable="false" />
+    <Property Name="Discription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Project_Id" Type="int" />
+    <Property Name="Developer_Id" Type="int" />
+    <Property Name="ModuleId" Type="int" />
+  </EntityType>
+  <Association Name="FK_CreateProject_CreateDeveloper">
+    <End Role="CreateDeveloper" Type="Self.CreateDeveloper" Multiplicity="0..1" />
+    <End Role="CreateProject" Type="Self.CreateProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreateDeveloper">
+        <PropertyRef Name="Developer_Id" />
+      </Principal>
+      <Dependent Role="CreateProject">
+        <PropertyRef Name="Developer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeveloperWorkProgress_CreateDeveloper">
+    <End Role="CreateDeveloper" Type="Self.CreateDeveloper" Multiplicity="0..1" />
+    <End Role="DeveloperWorkProgress" Type="Self.DeveloperWorkProgress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreateDeveloper">
+        <PropertyRef Name="Developer_Id" />
+      </Principal>
+      <Dependent Role="DeveloperWorkProgress">
+        <PropertyRef Name="Developer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeveloperWorkProgress_CreateProject">
+    <End Role="CreateProject" Type="Self.CreateProject" Multiplicity="0..1" />
+    <End Role="DeveloperWorkProgress" Type="Self.DeveloperWorkProgress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreateProject">
+        <PropertyRef Name="Project_Id" />
+      </Principal>
+      <Dependent Role="DeveloperWorkProgress">
+        <PropertyRef Name="Project_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeveloperWorkProgress_NewModule">
+    <End Role="NewModule" Type="Self.NewModule" Multiplicity="0..1" />
+    <End Role="DeveloperWorkProgress" Type="Self.DeveloperWorkProgress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewModule">
+        <PropertyRef Name="ModuleId" />
+      </Principal>
+      <Dependent Role="DeveloperWorkProgress">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeveloperWorkProgress_ProjectFeedback">
+    <End Role="ProjectFeedback" Type="Self.ProjectFeedback" Multiplicity="0..1" />
+    <End Role="DeveloperWorkProgress" Type="Self.DeveloperWorkProgress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectFeedback">
+        <PropertyRef Name="FeedId" />
+      </Principal>
+      <Dependent Role="DeveloperWorkProgress">
+        <PropertyRef Name="FeedId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewModule_CreateDeveloper">
+    <End Role="CreateDeveloper" Type="Self.CreateDeveloper" Multiplicity="0..1" />
+    <End Role="NewModule" Type="Self.NewModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreateDeveloper">
+        <PropertyRef Name="Developer_Id" />
+      </Principal>
+      <Dependent Role="NewModule">
+        <PropertyRef Name="Developer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewModule_CreateProject">
+    <End Role="CreateProject" Type="Self.CreateProject" Multiplicity="0..1" />
+    <End Role="NewModule" Type="Self.NewModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreateProject">
+        <PropertyRef Name="Project_Id" />
+      </Principal>
+      <Dependent Role="NewModule">
+        <PropertyRef Name="Project_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectFeedback_CreateDeveloper">
+    <End Role="CreateDeveloper" Type="Self.CreateDeveloper" Multiplicity="0..1" />
+    <End Role="ProjectFeedback" Type="Self.ProjectFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreateDeveloper">
+        <PropertyRef Name="Developer_Id" />
+      </Principal>
+      <Dependent Role="ProjectFeedback">
+        <PropertyRef Name="Developer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectFeedback_CreateProject">
+    <End Role="CreateProject" Type="Self.CreateProject" Multiplicity="0..1" />
+    <End Role="ProjectFeedback" Type="Self.ProjectFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreateProject">
+        <PropertyRef Name="Project_Id" />
+      </Principal>
+      <Dependent Role="ProjectFeedback">
+        <PropertyRef Name="Project_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectFeedback_NewModule">
+    <End Role="NewModule" Type="Self.NewModule" Multiplicity="0..1" />
+    <End Role="ProjectFeedback" Type="Self.ProjectFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewModule">
+        <PropertyRef Name="ModuleId" />
+      </Principal>
+      <Dependent Role="ProjectFeedback">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AssignProjectModelStoreContainer">
+    <EntitySet Name="CreateDeveloper" EntityType="Self.CreateDeveloper" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CreateProject" EntityType="Self.CreateProject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeveloperWorkProgress" EntityType="Self.DeveloperWorkProgress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NewModule" EntityType="Self.NewModule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectFeedback" EntityType="Self.ProjectFeedback" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CreateProject_CreateDeveloper" Association="Self.FK_CreateProject_CreateDeveloper">
+      <End Role="CreateDeveloper" EntitySet="CreateDeveloper" />
+      <End Role="CreateProject" EntitySet="CreateProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeveloperWorkProgress_CreateDeveloper" Association="Self.FK_DeveloperWorkProgress_CreateDeveloper">
+      <End Role="CreateDeveloper" EntitySet="CreateDeveloper" />
+      <End Role="DeveloperWorkProgress" EntitySet="DeveloperWorkProgress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeveloperWorkProgress_CreateProject" Association="Self.FK_DeveloperWorkProgress_CreateProject">
+      <End Role="CreateProject" EntitySet="CreateProject" />
+      <End Role="DeveloperWorkProgress" EntitySet="DeveloperWorkProgress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeveloperWorkProgress_NewModule" Association="Self.FK_DeveloperWorkProgress_NewModule">
+      <End Role="NewModule" EntitySet="NewModule" />
+      <End Role="DeveloperWorkProgress" EntitySet="DeveloperWorkProgress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeveloperWorkProgress_ProjectFeedback" Association="Self.FK_DeveloperWorkProgress_ProjectFeedback">
+      <End Role="ProjectFeedback" EntitySet="ProjectFeedback" />
+      <End Role="DeveloperWorkProgress" EntitySet="DeveloperWorkProgress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewModule_CreateDeveloper" Association="Self.FK_NewModule_CreateDeveloper">
+      <End Role="CreateDeveloper" EntitySet="CreateDeveloper" />
+      <End Role="NewModule" EntitySet="NewModule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewModule_CreateProject" Association="Self.FK_NewModule_CreateProject">
+      <End Role="CreateProject" EntitySet="CreateProject" />
+      <End Role="NewModule" EntitySet="NewModule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectFeedback_CreateDeveloper" Association="Self.FK_ProjectFeedback_CreateDeveloper">
+      <End Role="CreateDeveloper" EntitySet="CreateDeveloper" />
+      <End Role="ProjectFeedback" EntitySet="ProjectFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectFeedback_CreateProject" Association="Self.FK_ProjectFeedback_CreateProject">
+      <End Role="CreateProject" EntitySet="CreateProject" />
+      <End Role="ProjectFeedback" EntitySet="ProjectFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectFeedback_NewModule" Association="Self.FK_ProjectFeedback_NewModule">
+      <End Role="NewModule" EntitySet="NewModule" />
+      <End Role="ProjectFeedback" EntitySet="ProjectFeedback" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
